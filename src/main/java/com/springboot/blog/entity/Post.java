@@ -1,16 +1,16 @@
 package com.springboot.blog.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data // Lombok - Generates getters, setters, and toString (via annotations)
+//@Data // Lombok - Generates getters, setters, and toString (via annotations)
 @AllArgsConstructor // Generates all args constructor via Lombok
 @NoArgsConstructor // Generates no args constructor via Lombok
+@Getter // added these 2 instead of @Data to prevent stackoverflow error caused by toString()
+@Setter
 
 @Entity
 @Table(

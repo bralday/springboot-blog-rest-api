@@ -34,7 +34,7 @@ public class CommentController {
         return new ResponseEntity<>(commentService.createComment(postId,commentDto), HttpStatus.CREATED);
     }
 
-    // Get all posts with pagination and sorting support
+    // Get all comments of post
     @GetMapping("/posts/{postId}/comments")
     public List<CommentDto> getCommentsByPostId(
             @PathVariable(value = "postId") long postId
@@ -42,4 +42,32 @@ public class CommentController {
         return commentService.getCommentsByPostId(postId);
     }
 
+    // Get specific comment by id
+    @GetMapping("/posts/{postId}/comments/{id}")
+    public ResponseEntity<CommentDto> getCommentById(
+            @PathVariable(value = "postId") long postId,
+            @PathVariable(value = "id") long id
+    ){
+        return new ResponseEntity<>(commentService.getCommentById(postId,id),HttpStatus.OK);
+    }
+
+    // Update comment
+    @PutMapping("/posts/{postId}/comments/{id}")
+    public ResponseEntity<CommentDto> getCommentById(
+            @PathVariable(value = "postId") long postId,
+            @PathVariable(value = "id") long id,
+            @RequestBody CommentDto commentDto
+    ){
+        return new ResponseEntity<>(commentService.updateComment(postId,id,commentDto), HttpStatus.OK);
+    }
+
+    // Delete comment by id
+    @DeleteMapping("/posts/{postId}/comments/{id}")
+    public ResponseEntity<String> deleteComment(
+            @PathVariable(value = "postId") long postId,
+            @PathVariable(value = "id") long id){
+        commentService.deleteComment(postId,id);
+
+        return new ResponseEntity<>("Comment has been deleted successfully!", HttpStatus.OK);
+    }
 }
